@@ -1,0 +1,10 @@
+{
+  "self_replicates": false,
+  "network_spread": true,
+  "encrypts_files": true,
+  "hides_processes": false,
+  "modifies_mbr": false,
+  "creates_backdoor": false,
+  "drops_payload": true,
+  "persistence_method": "registry"
+}
