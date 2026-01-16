@@ -1,10 +1,10 @@
-# Exercice 0.7.8-a : structs
+# Exercice 0.7.8 : structs
 
 **Module :**
-0.7.8 — Structures
+0.7 — Introduction a Rust
 
 **Concept :**
-a-e — struct definition, impl, methods, associated functions, derive
+i — Structures : definition, impl, et methodes
 
 **Difficulte :**
 ★★★★☆☆☆☆☆☆ (4/10)
@@ -19,19 +19,20 @@ code
 Rust Edition 2024
 
 **Prerequis :**
-0.7.7 (strings)
+- Exercice 0.7.7 (strings)
+- Comprehension des types
 
 **Domaines :**
-Algo, Structures
+Structs, OOP
 
 **Duree estimee :**
-180 min
+50 min
 
 **XP Base :**
-250
+95
 
 **Complexite :**
-T1 O(1) x S1 O(1)
+T0 O(1) × S0 O(1)
 
 ---
 
@@ -40,80 +41,46 @@ T1 O(1) x S1 O(1)
 ### 1.1 Obligations
 
 **Fichiers a rendre :**
-- `src/lib.rs`
+
+| Langage | Fichiers |
+|---------|----------|
+| Rust | `src/lib.rs` |
+
+**Fonctions autorisees :**
+
+| Langage | Fonctions |
+|---------|-----------|
+| Rust | Toutes les fonctions de la bibliotheque standard |
+
+**Fonctions interdites :**
+
+| Langage | Fonctions |
+|---------|-----------|
+| Rust | `unsafe` |
+
+---
 
 ### 1.2 Consigne
 
-Implementer des structures avec methodes et fonctions associees.
+#### Section Culture : "Struct Your Stuff"
+
+Les structures en Rust permettent de regrouper des donnees liees. Contrairement aux classes dans d'autres langages, les struct Rust n'ont pas d'heritage. On utilise des traits pour le polymorphisme.
+
+Le bloc `impl` permet d'ajouter des methodes a une structure. La premiere methode qui prend `&self` ou `&mut self` est une methode d'instance.
+
+---
+
+#### Section Academique : Enonce Formel
 
 **Ta mission :**
 
-```rust
-// Structure Point 2D
-#[derive(Debug, Clone, Copy, PartialEq)]
-pub struct Point {
-    pub x: f64,
-    pub y: f64,
-}
+Implementer des structures avec methodes :
 
-impl Point {
-    // Constructeur (fonction associee)
-    pub fn new(x: f64, y: f64) -> Self;
+1. `Point` : structure avec coordonnees x, y et methodes
+2. `Rectangle` : structure avec position et dimensions
+3. Implementer des fonctions associees (constructeurs) et des methodes
 
-    // Point a l'origine
-    pub fn origin() -> Self;
-
-    // Distance depuis l'origine
-    pub fn distance_from_origin(&self) -> f64;
-
-    // Distance vers un autre point
-    pub fn distance_to(&self, other: &Point) -> f64;
-
-    // Deplacer le point
-    pub fn translate(&mut self, dx: f64, dy: f64);
-
-    // Creer un point translate (immutable)
-    pub fn translated(&self, dx: f64, dy: f64) -> Self;
-}
-
-// Structure Rectangle
-#[derive(Debug, Clone)]
-pub struct Rectangle {
-    pub top_left: Point,
-    pub width: f64,
-    pub height: f64,
-}
-
-impl Rectangle {
-    pub fn new(top_left: Point, width: f64, height: f64) -> Self;
-    pub fn area(&self) -> f64;
-    pub fn perimeter(&self) -> f64;
-    pub fn contains(&self, point: &Point) -> bool;
-    pub fn center(&self) -> Point;
-}
-```
-
-**Comportement:**
-
-1. `Point::new(3.0, 4.0).distance_from_origin()` -> 5.0
-2. `Rectangle::new(Point::origin(), 10.0, 5.0).area()` -> 50.0
-3. `rect.contains(&Point::new(5.0, 2.0))` -> true (si dans le rectangle)
-
-**Exemples:**
-```rust
-let mut p = Point::new(3.0, 4.0);
-println!("{:?}", p);  // Point { x: 3.0, y: 4.0 }
-println!("{}", p.distance_from_origin());  // 5.0
-
-p.translate(1.0, 1.0);
-println!("{:?}", p);  // Point { x: 4.0, y: 5.0 }
-
-let rect = Rectangle::new(Point::origin(), 10.0, 5.0);
-println!("Area: {}", rect.area());  // 50.0
-println!("Contains origin: {}", rect.contains(&Point::origin()));  // true
-```
-
-### 1.3 Prototype
+**Entree :**
 
 ```rust
 // src/lib.rs
@@ -125,79 +92,189 @@ pub struct Point {
 }
 
 impl Point {
+    /// Cree un nouveau point.
     pub fn new(x: f64, y: f64) -> Self {
-        todo!()
+        // A implementer
     }
 
+    /// Point a l'origine (0, 0).
     pub fn origin() -> Self {
-        todo!()
+        // A implementer
     }
 
+    /// Distance depuis l'origine.
     pub fn distance_from_origin(&self) -> f64 {
-        todo!()
+        // A implementer
     }
 
+    /// Distance vers un autre point.
     pub fn distance_to(&self, other: &Point) -> f64 {
-        todo!()
+        // A implementer
     }
 
+    /// Deplace le point (mutable).
     pub fn translate(&mut self, dx: f64, dy: f64) {
-        todo!()
+        // A implementer
     }
 
+    /// Retourne un nouveau point translate.
     pub fn translated(&self, dx: f64, dy: f64) -> Self {
-        todo!()
+        // A implementer
     }
 }
 
 #[derive(Debug, Clone)]
 pub struct Rectangle {
-    pub top_left: Point,
+    pub origin: Point,
     pub width: f64,
     pub height: f64,
 }
 
 impl Rectangle {
-    pub fn new(top_left: Point, width: f64, height: f64) -> Self {
-        todo!()
+    /// Cree un nouveau rectangle.
+    pub fn new(origin: Point, width: f64, height: f64) -> Self {
+        // A implementer
     }
 
+    /// Calcule l'aire.
     pub fn area(&self) -> f64 {
-        todo!()
+        // A implementer
     }
 
+    /// Calcule le perimetre.
     pub fn perimeter(&self) -> f64 {
-        todo!()
+        // A implementer
     }
 
+    /// Verifie si un point est dans le rectangle.
     pub fn contains(&self, point: &Point) -> bool {
-        todo!()
+        // A implementer
     }
+}
+```
 
-    pub fn center(&self) -> Point {
-        todo!()
-    }
+**Sortie attendue :**
+
+```
+$ cargo test
+running 8 tests
+test tests::test_point_new ... ok
+test tests::test_point_distance ... ok
+test tests::test_point_translate ... ok
+test tests::test_rect_area ... ok
+test tests::test_rect_contains ... ok
+...
+test result: ok. 8 passed; 0 failed
+```
+
+**Contraintes :**
+- Utiliser `Self` pour le type de retour des constructeurs
+- `&self` pour les methodes en lecture
+- `&mut self` pour les methodes qui modifient
+
+**Exemples :**
+
+| Methode | Input | Output |
+|---------|-------|--------|
+| `Point::new(3.0, 4.0).distance_from_origin()` | - | `5.0` |
+| `Rectangle::new(Point::origin(), 10.0, 5.0).area()` | - | `50.0` |
+
+---
+
+### 1.3 Prototype
+
+```rust
+impl Point {
+    pub fn new(x: f64, y: f64) -> Self;
+    pub fn origin() -> Self;
+    pub fn distance_from_origin(&self) -> f64;
+    pub fn distance_to(&self, other: &Point) -> f64;
+    pub fn translate(&mut self, dx: f64, dy: f64);
+    pub fn translated(&self, dx: f64, dy: f64) -> Self;
+}
+
+impl Rectangle {
+    pub fn new(origin: Point, width: f64, height: f64) -> Self;
+    pub fn area(&self) -> f64;
+    pub fn perimeter(&self) -> f64;
+    pub fn contains(&self, point: &Point) -> bool;
 }
 ```
 
 ---
 
-## SECTION 4 : ZONE CORRECTION
+## SECTION 2 : LE SAVIEZ-VOUS ?
 
-### 4.1 Moulinette
+### 2.1 Fun Facts
 
-| Test ID | Input | Expected | Points |
-|---------|-------|----------|--------|
-| T01 | Point::new | correct | 10 |
-| T02 | distance_from_origin | 5.0 for (3,4) | 15 |
-| T03 | distance_to | correct | 10 |
-| T04 | translate | mutated | 10 |
-| T05 | translated | new point | 10 |
-| T06 | Rectangle::area | correct | 15 |
-| T07 | Rectangle::contains | correct | 15 |
-| T08 | Rectangle::center | correct | 15 |
+**Self vs self :**
 
-### 4.3 Solution de reference
+- `Self` (majuscule) = le type de la structure
+- `self` (minuscule) = l'instance de la structure
+
+**Methode vs Fonction associee :**
+
+- Methode : prend `self`, `&self`, ou `&mut self` en premier parametre
+- Fonction associee : pas de `self`, appele avec `Type::fonction()`
+
+**derive :**
+
+```rust
+#[derive(Debug, Clone, Copy, PartialEq)]
+```
+Genere automatiquement des implementations de traits.
+
+---
+
+### 2.5 DANS LA VRAIE VIE
+
+| Metier | Utilisation du concept |
+|--------|----------------------|
+| **Game Dev** | Entites, composants, vecteurs |
+| **Web Dev** | DTOs, modeles de donnees |
+| **Systems** | Configurations, etats |
+| **Data** | Records, schemas |
+
+---
+
+## SECTION 3 : EXEMPLE D'UTILISATION
+
+### 3.0 Session bash
+
+```bash
+$ cargo new structs --lib
+     Created library `structs` package
+
+$ cargo test
+running 8 tests
+test tests::test_point_new ... ok
+test tests::test_point_distance ... ok
+...
+test result: ok. 8 passed; 0 failed
+```
+
+---
+
+## SECTION 4 : ZONE CORRECTION (POUR LE TESTEUR)
+
+### 4.1 Moulinette — Tableau des tests
+
+| # | Test | Input | Expected | Points | Categorie |
+|---|------|-------|----------|--------|-----------|
+| 1 | point_new | `(3.0, 4.0)` | Point | 10 | Basic |
+| 2 | point_origin | - | `(0.0, 0.0)` | 5 | Basic |
+| 3 | distance_origin | `(3.0, 4.0)` | `5.0` | 15 | Math |
+| 4 | distance_to | deux points | correct | 15 | Math |
+| 5 | translate | mutation | correct | 10 | Mutation |
+| 6 | translated | nouveau point | correct | 10 | Immutable |
+| 7 | rect_area | `10x5` | `50.0` | 15 | Math |
+| 8 | rect_contains | point inside | `true` | 20 | Logic |
+
+**Total : 100 points**
+
+---
+
+### 4.3 Solution de reference (Rust)
 
 ```rust
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -240,15 +317,15 @@ impl Point {
 
 #[derive(Debug, Clone)]
 pub struct Rectangle {
-    pub top_left: Point,
+    pub origin: Point,
     pub width: f64,
     pub height: f64,
 }
 
 impl Rectangle {
-    pub fn new(top_left: Point, width: f64, height: f64) -> Self {
+    pub fn new(origin: Point, width: f64, height: f64) -> Self {
         Self {
-            top_left,
+            origin,
             width: width.abs(),
             height: height.abs(),
         }
@@ -263,101 +340,113 @@ impl Rectangle {
     }
 
     pub fn contains(&self, point: &Point) -> bool {
-        point.x >= self.top_left.x
-            && point.x <= self.top_left.x + self.width
-            && point.y >= self.top_left.y
-            && point.y <= self.top_left.y + self.height
-    }
-
-    pub fn center(&self) -> Point {
-        Point::new(
-            self.top_left.x + self.width / 2.0,
-            self.top_left.y + self.height / 2.0,
-        )
-    }
-}
-```
-
-### 4.10 Solutions Mutantes
-
-```rust
-// MUTANT 1: distance_from_origin sans sqrt
-impl Point {
-    pub fn distance_from_origin(&self) -> f64 {
-        self.x * self.x + self.y * self.y  // Manque .sqrt()
-    }
-}
-
-// MUTANT 2: translate retourne au lieu de muter
-impl Point {
-    pub fn translate(&mut self, dx: f64, dy: f64) {
-        // Ne modifie pas self, retourne nouveau (signature incorrecte)
-        let _ = Point::new(self.x + dx, self.y + dy);
-    }
-}
-
-// MUTANT 3: contains avec bornes strictes
-impl Rectangle {
-    pub fn contains(&self, point: &Point) -> bool {
-        point.x > self.top_left.x  // > au lieu de >=
-            && point.x < self.top_left.x + self.width
-            && point.y > self.top_left.y
-            && point.y < self.top_left.y + self.height
-    }
-}
-
-// MUTANT 4: perimeter formule incorrecte
-impl Rectangle {
-    pub fn perimeter(&self) -> f64 {
-        self.width + self.height  // Manque le * 2
-    }
-}
-
-// MUTANT 5: center oublie top_left offset
-impl Rectangle {
-    pub fn center(&self) -> Point {
-        Point::new(self.width / 2.0, self.height / 2.0)
-        // Oublie d'ajouter top_left
+        point.x >= self.origin.x
+            && point.x <= self.origin.x + self.width
+            && point.y >= self.origin.y
+            && point.y <= self.origin.y + self.height
     }
 }
 ```
 
 ---
 
-## SECTION 5 : COMPRENDRE
+### 4.10 Solutions Mutantes (minimum 5)
+
+**Mutant A (Math) : distance sans sqrt**
+
+```rust
+/* Mutant A (Math) : Oubli du sqrt */
+pub fn distance_from_origin(&self) -> f64 {
+    self.x * self.x + self.y * self.y  // Manque .sqrt()
+}
+// Pourquoi faux : Retourne le carre de la distance
+```
+
+**Mutant B (Logic) : translate ne modifie pas**
+
+```rust
+/* Mutant B (Logic) : Pas de mutation */
+pub fn translate(&mut self, dx: f64, dy: f64) {
+    let _ = Point::new(self.x + dx, self.y + dy);
+    // Ne modifie pas self!
+}
+// Pourquoi faux : self n'est pas modifie
+```
+
+**Mutant C (Math) : perimeter incorrecte**
+
+```rust
+/* Mutant C (Math) : Formule incorrecte */
+pub fn perimeter(&self) -> f64 {
+    self.width + self.height  // Manque * 2
+}
+// Pourquoi faux : Demi-perimetre seulement
+```
+
+**Mutant D (Logic) : contains stricte**
+
+```rust
+/* Mutant D (Logic) : Bornes strictes */
+pub fn contains(&self, point: &Point) -> bool {
+    point.x > self.origin.x  // > au lieu de >=
+        && point.x < self.origin.x + self.width
+        && point.y > self.origin.y
+        && point.y < self.origin.y + self.height
+}
+// Pourquoi faux : Exclut les points sur les bords
+```
+
+**Mutant E (Type) : Retourne Point au lieu de Self**
+
+```rust
+/* Mutant E (Type) : Hardcode le type */
+pub fn new(x: f64, y: f64) -> Point {
+    Point { x, y }
+}
+// Pourquoi faux : Moins flexible, devrait utiliser Self
+```
+
+---
+
+## SECTION 5 : COMPRENDRE (DOCUMENT DE COURS COMPLET)
 
 ### 5.1 Ce que cet exercice enseigne
 
-Les **structures** en Rust:
+| Concept | Description | Importance |
+|---------|-------------|------------|
+| struct | Definition de type composite | Critique |
+| impl | Bloc d'implementation | Critique |
+| &self | Methode en lecture | Critique |
+| &mut self | Methode en ecriture | Critique |
+| Self | Alias pour le type courant | Important |
 
-1. **struct** - Definir un type de donnees composite
-2. **impl** - Ajouter des methodes et fonctions associees
-3. **&self** - Methode qui emprunte la structure
-4. **&mut self** - Methode qui modifie la structure
-5. **derive** - Generation automatique de traits
+---
 
 ### 5.3 Visualisation ASCII
 
-```
-STRUCTURE MEMOIRE:
+**Structure en memoire :**
 
+```
 Point { x: 3.0, y: 4.0 }
 
 Stack:
 +--------+--------+
 |   x    |   y    |
-| 3.0    | 4.0    |
+|  3.0   |  4.0   |
 +--------+--------+
   8 bytes  8 bytes = 16 bytes total
 
-Rectangle:
-+--------+--------+--------+--------+
-| top_left.x | top_left.y | width | height |
-|    0.0     |    0.0     | 10.0  |  5.0   |
-+--------+--------+--------+--------+
 
-METHODES VS FONCTIONS ASSOCIEES:
+Rectangle avec Point:
++--------+--------+--------+--------+
+| origin.x | origin.y | width | height |
+|   0.0    |   0.0    | 10.0  |  5.0   |
++--------+--------+--------+--------+
+```
 
+**Methodes vs Fonctions associees :**
+
+```
 Point::new(3.0, 4.0)      // Fonction associee (pas de self)
         |                  // Appel avec ::
         v
@@ -367,70 +456,196 @@ point.distance_to(&other)  // Methode (prend &self)
       |                    // Appel avec .
       v
 fn distance_to(&self, other: &Point) -> f64
+```
 
-SELF VARIANTS:
-&self     -> emprunt immutable (lecture)
-&mut self -> emprunt mutable (modification)
+**Types de self :**
+
+```
+&self     -> emprunt immutable (lecture seule)
+&mut self -> emprunt mutable (modification possible)
 self      -> ownership (consomme la structure)
 ```
 
-### 5.5 Derive Macros
+---
+
+### 5.4 Les pieges en detail
+
+#### Piege 1 : Oublier pub sur les champs
 
 ```rust
-#[derive(Debug)]        // Permet {:?} formatting
-#[derive(Clone)]        // Permet .clone()
-#[derive(Copy)]         // Copie implicite (types simples)
-#[derive(PartialEq)]    // Permet == et !=
-#[derive(Eq)]           // Egalite complete
-#[derive(Hash)]         // Permet d'utiliser dans HashMap
-#[derive(Default)]      // Valeur par defaut
+pub struct Point {
+    x: f64,  // PRIVE! Non accessible hors du module
+    y: f64,
+}
 
-// Peut combiner plusieurs
-#[derive(Debug, Clone, Copy, PartialEq)]
-pub struct Point { ... }
+// Solution
+pub struct Point {
+    pub x: f64,  // Public
+    pub y: f64,
+}
 ```
+
+#### Piege 2 : Confondre Self et self
+
+```rust
+impl Point {
+    // Self = le type Point
+    pub fn new(x: f64, y: f64) -> Self { ... }
+
+    // self = l'instance
+    pub fn method(&self) { ... }
+}
+```
+
+---
+
+### 5.5 Cours Complet
+
+#### 5.5.1 Definition de struct
+
+```rust
+// Struct classique
+struct Point {
+    x: f64,
+    y: f64,
+}
+
+// Tuple struct
+struct Color(u8, u8, u8);
+
+// Unit struct
+struct Marker;
+```
+
+#### 5.5.2 Bloc impl
+
+```rust
+impl Point {
+    // Fonction associee (constructeur)
+    pub fn new(x: f64, y: f64) -> Self {
+        Self { x, y }
+    }
+
+    // Methode immutable
+    pub fn length(&self) -> f64 {
+        (self.x * self.x + self.y * self.y).sqrt()
+    }
+
+    // Methode mutable
+    pub fn scale(&mut self, factor: f64) {
+        self.x *= factor;
+        self.y *= factor;
+    }
+
+    // Methode qui consomme self
+    pub fn into_tuple(self) -> (f64, f64) {
+        (self.x, self.y)
+    }
+}
+```
+
+#### 5.5.3 derive
+
+```rust
+#[derive(Debug)]        // {:?} formatting
+#[derive(Clone)]        // .clone()
+#[derive(Copy)]         // copie implicite
+#[derive(PartialEq)]    // == et !=
+#[derive(Default)]      // Point::default()
+```
+
+---
+
+### 5.8 Mnemotechniques
+
+**IMPL = Instance Methods Plus Library functions**
+
+Le bloc impl contient les methodes d'instance et les fonctions de la bibliotheque (constructeurs).
+
+**Self = Same type as the implementing struct**
+
+---
+
+## SECTION 6 : PIEGES — RECAPITULATIF
+
+| # | Piege | Consequence | Solution |
+|---|-------|-------------|----------|
+| 1 | Champs prives | Inaccessibles | Ajouter `pub` |
+| 2 | Self vs self | Confusion type/instance | Self = type |
+| 3 | &self vs &mut self | Mutation interdite | Utiliser &mut self |
+| 4 | Oubli de .sqrt() | Distance incorrecte | Formule Pythagore |
 
 ---
 
 ## SECTION 7 : QCM
 
-### Question 1
-Quelle est la difference entre `fn new()` et `fn area(&self)` ?
+### Question 1 (3 points)
+Quelle est la difference entre une methode et une fonction associee ?
 
-A) new est public, area est prive
-B) new est une fonction associee, area est une methode
-C) new retourne Self, area retourne f64
-D) Pas de difference
-E) new est statique, area est dynamique
+- A) Les methodes sont plus rapides
+- B) Les methodes prennent self, les fonctions associees non
+- C) Les fonctions associees sont privees
+- D) Pas de difference
 
-**Reponse correcte: B**
-
-### Question 2
-Que signifie `&mut self` dans une methode ?
-
-A) self est copie
-B) self est detruit
-C) self est emprunte en lecture
-D) self est emprunte en ecriture
-E) self est optionnel
-
-**Reponse correcte: D**
+**Reponse : B** — Les methodes ont self, &self, ou &mut self.
 
 ---
 
-## SECTION 9 : DEPLOYMENT PACK
+### Question 2 (4 points)
+Que signifie `&mut self` ?
+
+- A) self est copie
+- B) self est emprunte en lecture
+- C) self est emprunte en ecriture
+- D) self est detruit
+
+**Reponse : C** — &mut self permet de modifier la structure.
+
+---
+
+## SECTION 8 : RECAPITULATIF
+
+| Critere | Valeur |
+|---------|--------|
+| **ID** | 0.7.8 |
+| **Nom** | structs |
+| **Difficulte** | 4/10 |
+| **Duree** | 50 min |
+| **XP Base** | 95 |
+| **Langages** | Rust Edition 2024 |
+| **Concepts cles** | struct, impl, &self, &mut self, methods |
+| **Prerequis** | strings |
+| **Domaines** | Structs, OOP |
+
+---
+
+## SECTION 9 : DEPLOYMENT PACK (JSON COMPLET)
 
 ```json
 {
-  "exercise_id": "0.7.8-a",
-  "name": "structs",
-  "language": "rust",
-  "language_version": "edition2024",
-  "files": ["src/lib.rs"],
-  "tests": {
-    "point": "point_tests",
-    "rectangle": "rectangle_tests",
-    "methods": "method_tests"
+  "deploy": {
+    "hackbrain_version": "5.5.2",
+    "engine_version": "v22.1",
+    "exercise_slug": "0.7.8-structs",
+    "generated_at": "2026-01-16",
+
+    "metadata": {
+      "exercise_id": "0.7.8",
+      "exercise_name": "structs",
+      "module": "0.7",
+      "concept": "i",
+      "concept_name": "Structures",
+      "type": "code",
+      "tier": 1,
+      "difficulty": 4,
+      "prerequisites": ["0.7.7"],
+      "domains": ["Structs", "OOP"],
+      "tags": ["struct", "impl", "methods", "self"]
+    }
   }
 }
 ```
+
+---
+
+*Document genere selon HACKBRAIN v5.5.2*
