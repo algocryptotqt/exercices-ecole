@@ -1,10 +1,10 @@
-# Exercice 0.7.12-a : vectors
+# Exercice 0.7.12 : vectors
 
 **Module :**
-0.7.12 — Vec<T>
+0.7 — Introduction a Rust
 
 **Concept :**
-a-e — push, pop, len, capacity, iter, slice conversion
+m — Vectors : collections dynamiques
 
 **Difficulte :**
 ★★★★☆☆☆☆☆☆ (4/10)
@@ -19,19 +19,20 @@ code
 Rust Edition 2024
 
 **Prerequis :**
-0.7.11 (result)
+- Exercice 0.7.11 (result)
+- Slices et references
 
 **Domaines :**
-Algo, Structures
+Collections, Memory
 
 **Duree estimee :**
-150 min
+45 min
 
 **XP Base :**
-220
+90
 
 **Complexite :**
-T2 O(n) x S2 O(n)
+T1 O(n) × S1 O(n)
 
 ---
 
@@ -40,338 +41,400 @@ T2 O(n) x S2 O(n)
 ### 1.1 Obligations
 
 **Fichiers a rendre :**
-- `src/lib.rs`
+
+| Langage | Fichiers |
+|---------|----------|
+| Rust | `src/lib.rs` |
+
+---
 
 ### 1.2 Consigne
 
-Implementer des fonctions manipulant les vecteurs.
+#### Section Culture : "Vec: The Swiss Army Knife of Collections"
+
+Vec<T> est le tableau dynamique de Rust. Contrairement aux arrays de taille fixe, un Vec peut grandir et retrecir. Il alloue sur le heap et gere automatiquement sa capacite.
+
+---
+
+#### Section Academique : Enonce Formel
 
 **Ta mission :**
 
-```rust
-// Creer un vecteur avec elements
-pub fn create_vec(elements: &[i32]) -> Vec<i32>;
+Implementer des fonctions manipulant Vec<T> :
 
-// Ajouter un element et retourner la nouvelle longueur
-pub fn push_and_len(vec: &mut Vec<i32>, value: i32) -> usize;
+1. `create_vec` : creer un vecteur
+2. `push_pop` : ajouter et retirer des elements
+3. `sum_vec` : calculer la somme
+4. `filter_even` : filtrer les nombres pairs
+5. `reverse_vec` : inverser un vecteur
 
-// Retirer le dernier element
-pub fn pop_last(vec: &mut Vec<i32>) -> Option<i32>;
-
-// Filtrer les elements pairs
-pub fn filter_even(vec: &[i32]) -> Vec<i32>;
-
-// Doubler tous les elements
-pub fn double_all(vec: &[i32]) -> Vec<i32>;
-
-// Somme des elements
-pub fn sum_vec(vec: &[i32]) -> i32;
-
-// Trouver l'index d'un element
-pub fn find_index(vec: &[i32], target: i32) -> Option<usize>;
-
-// Concatener deux vecteurs
-pub fn concat_vecs(v1: &[i32], v2: &[i32]) -> Vec<i32>;
-
-// Inverser un vecteur
-pub fn reverse_vec(vec: &[i32]) -> Vec<i32>;
-
-// Supprimer les doublons
-pub fn remove_duplicates(vec: &[i32]) -> Vec<i32>;
-```
-
-**Comportement:**
-
-1. `filter_even(&[1, 2, 3, 4])` -> [2, 4]
-2. `double_all(&[1, 2, 3])` -> [2, 4, 6]
-3. `find_index(&[10, 20, 30], 20)` -> Some(1)
-4. `remove_duplicates(&[1, 2, 2, 3, 1])` -> [1, 2, 3]
-
-**Exemples:**
-```rust
-let mut vec = create_vec(&[1, 2, 3]);
-push_and_len(&mut vec, 4);  // vec = [1, 2, 3, 4], returns 4
-
-let even = filter_even(&vec);
-println!("{:?}", even);  // [2, 4]
-
-let doubled = double_all(&vec);
-println!("{:?}", doubled);  // [2, 4, 6, 8]
-
-println!("{}", sum_vec(&vec));  // 10
-```
-
-### 1.3 Prototype
+**Entree :**
 
 ```rust
 // src/lib.rs
 
+/// Cree un vecteur avec les elements donnes.
 pub fn create_vec(elements: &[i32]) -> Vec<i32> {
-    todo!()
+    // A implementer
 }
 
-pub fn push_and_len(vec: &mut Vec<i32>, value: i32) -> usize {
-    todo!()
+/// Ajoute un element a la fin.
+pub fn push_element(vec: &mut Vec<i32>, elem: i32) {
+    // A implementer
 }
 
-pub fn pop_last(vec: &mut Vec<i32>) -> Option<i32> {
-    todo!()
+/// Retire et retourne le dernier element.
+pub fn pop_element(vec: &mut Vec<i32>) -> Option<i32> {
+    // A implementer
 }
 
-pub fn filter_even(vec: &[i32]) -> Vec<i32> {
-    todo!()
-}
-
-pub fn double_all(vec: &[i32]) -> Vec<i32> {
-    todo!()
-}
-
+/// Calcule la somme des elements.
 pub fn sum_vec(vec: &[i32]) -> i32 {
-    todo!()
+    // A implementer
 }
 
-pub fn find_index(vec: &[i32], target: i32) -> Option<usize> {
-    todo!()
+/// Retourne un nouveau vecteur avec les nombres pairs.
+pub fn filter_even(vec: &[i32]) -> Vec<i32> {
+    // A implementer
 }
 
-pub fn concat_vecs(v1: &[i32], v2: &[i32]) -> Vec<i32> {
-    todo!()
+/// Inverse le vecteur en place.
+pub fn reverse_in_place(vec: &mut Vec<i32>) {
+    // A implementer
 }
 
+/// Retourne un nouveau vecteur inverse.
 pub fn reverse_vec(vec: &[i32]) -> Vec<i32> {
-    todo!()
+    // A implementer
 }
 
-pub fn remove_duplicates(vec: &[i32]) -> Vec<i32> {
-    todo!()
+/// Trouve l'element maximum.
+pub fn find_max(vec: &[i32]) -> Option<i32> {
+    // A implementer
 }
+```
+
+**Sortie attendue :**
+
+```
+$ cargo test
+running 8 tests
+test tests::test_create_vec ... ok
+test tests::test_push_element ... ok
+test tests::test_pop_element ... ok
+test tests::test_sum_vec ... ok
+test tests::test_filter_even ... ok
+test tests::test_reverse ... ok
+test tests::test_find_max ... ok
+...
+
+test result: ok. 8 passed; 0 failed
 ```
 
 ---
 
-## SECTION 4 : ZONE CORRECTION
+### 1.3 Prototype
 
-### 4.1 Moulinette
+```rust
+pub fn create_vec(elements: &[i32]) -> Vec<i32>;
+pub fn push_element(vec: &mut Vec<i32>, elem: i32);
+pub fn pop_element(vec: &mut Vec<i32>) -> Option<i32>;
+pub fn sum_vec(vec: &[i32]) -> i32;
+pub fn filter_even(vec: &[i32]) -> Vec<i32>;
+pub fn reverse_in_place(vec: &mut Vec<i32>);
+pub fn reverse_vec(vec: &[i32]) -> Vec<i32>;
+pub fn find_max(vec: &[i32]) -> Option<i32>;
+```
 
-| Test ID | Input | Expected | Points |
-|---------|-------|----------|--------|
-| T01 | create_vec | correct | 5 |
-| T02 | push_and_len | length | 10 |
-| T03 | pop_last | Some/None | 10 |
-| T04 | filter_even | evens only | 15 |
-| T05 | double_all | doubled | 10 |
-| T06 | sum_vec | sum | 10 |
-| T07 | find_index | Some/None | 15 |
-| T08 | concat_vecs | combined | 10 |
-| T09 | remove_duplicates | unique | 15 |
+---
 
-### 4.3 Solution de reference
+## SECTION 2 : LE SAVIEZ-VOUS ?
+
+### 2.1 Fun Facts
+
+**Vec vs Array :**
+
+```rust
+let arr: [i32; 3] = [1, 2, 3];  // Taille fixe, stack
+let vec: Vec<i32> = vec![1, 2, 3];  // Taille variable, heap
+```
+
+**Capacite vs Longueur :**
+
+```rust
+let mut v = Vec::with_capacity(10);
+v.push(1);
+// v.len() = 1 (elements)
+// v.capacity() = 10 (espace alloue)
+```
+
+**Macro vec! :**
+
+```rust
+let v1 = vec![1, 2, 3];        // Elements
+let v2 = vec![0; 10];          // 10 zeros
+let v3: Vec<i32> = Vec::new(); // Vide
+```
+
+---
+
+## SECTION 3 : EXEMPLE D'UTILISATION
+
+### 3.0 Session bash
+
+```bash
+$ cargo test
+running 8 tests
+...
+test result: ok. 8 passed; 0 failed
+```
+
+---
+
+## SECTION 4 : ZONE CORRECTION (POUR LE TESTEUR)
+
+### 4.3 Solution de reference (Rust)
 
 ```rust
 pub fn create_vec(elements: &[i32]) -> Vec<i32> {
     elements.to_vec()
 }
 
-pub fn push_and_len(vec: &mut Vec<i32>, value: i32) -> usize {
-    vec.push(value);
-    vec.len()
+pub fn push_element(vec: &mut Vec<i32>, elem: i32) {
+    vec.push(elem);
 }
 
-pub fn pop_last(vec: &mut Vec<i32>) -> Option<i32> {
+pub fn pop_element(vec: &mut Vec<i32>) -> Option<i32> {
     vec.pop()
-}
-
-pub fn filter_even(vec: &[i32]) -> Vec<i32> {
-    vec.iter().filter(|&&n| n % 2 == 0).copied().collect()
-}
-
-pub fn double_all(vec: &[i32]) -> Vec<i32> {
-    vec.iter().map(|&n| n * 2).collect()
 }
 
 pub fn sum_vec(vec: &[i32]) -> i32 {
     vec.iter().sum()
 }
 
-pub fn find_index(vec: &[i32], target: i32) -> Option<usize> {
-    vec.iter().position(|&n| n == target)
+pub fn filter_even(vec: &[i32]) -> Vec<i32> {
+    vec.iter().filter(|&&x| x % 2 == 0).copied().collect()
 }
 
-pub fn concat_vecs(v1: &[i32], v2: &[i32]) -> Vec<i32> {
-    let mut result = v1.to_vec();
-    result.extend(v2);
-    result
+pub fn reverse_in_place(vec: &mut Vec<i32>) {
+    vec.reverse();
 }
 
 pub fn reverse_vec(vec: &[i32]) -> Vec<i32> {
     vec.iter().rev().copied().collect()
 }
 
-pub fn remove_duplicates(vec: &[i32]) -> Vec<i32> {
-    let mut seen = std::collections::HashSet::new();
-    vec.iter()
-        .filter(|&&n| seen.insert(n))
-        .copied()
-        .collect()
-}
-```
-
-### 4.10 Solutions Mutantes
-
-```rust
-// MUTANT 1: filter_even avec mauvaise condition
-pub fn filter_even(vec: &[i32]) -> Vec<i32> {
-    vec.iter().filter(|&&n| n % 2 != 0).copied().collect()
-    // Retourne les impairs!
-}
-
-// MUTANT 2: double_all modifie en place (ne compile pas)
-pub fn double_all(vec: &[i32]) -> Vec<i32> {
-    for n in vec.iter_mut() {  // Erreur: vec est &[i32], pas &mut
-        *n *= 2;
-    }
-    vec.to_vec()
-}
-
-// MUTANT 3: find_index off-by-one
-pub fn find_index(vec: &[i32], target: i32) -> Option<usize> {
-    vec.iter().position(|&n| n == target).map(|i| i + 1)
-    // Retourne index+1
-}
-
-// MUTANT 4: concat_vecs ordre inverse
-pub fn concat_vecs(v1: &[i32], v2: &[i32]) -> Vec<i32> {
-    let mut result = v2.to_vec();
-    result.extend(v1);  // v2 puis v1, ordre inverse
-    result
-}
-
-// MUTANT 5: remove_duplicates garde le dernier
-pub fn remove_duplicates(vec: &[i32]) -> Vec<i32> {
-    let mut seen = std::collections::HashSet::new();
-    vec.iter()
-        .rev()  // Parcourt a l'envers, garde le dernier au lieu du premier
-        .filter(|&&n| seen.insert(n))
-        .copied()
-        .collect::<Vec<_>>()
-        .into_iter()
-        .rev()
-        .collect()
+pub fn find_max(vec: &[i32]) -> Option<i32> {
+    vec.iter().copied().max()
 }
 ```
 
 ---
 
-## SECTION 5 : COMPRENDRE
+### 4.10 Solutions Mutantes (minimum 5)
+
+**Mutant A : pop sans gestion du vide**
+
+```rust
+pub fn pop_element(vec: &mut Vec<i32>) -> Option<i32> {
+    Some(vec.pop().unwrap())  // Panic si vide!
+}
+// Pourquoi faux : Panic sur vecteur vide
+```
+
+**Mutant B : sum avec overflow**
+
+```rust
+pub fn sum_vec(vec: &[i32]) -> i32 {
+    let mut sum: i32 = 0;
+    for x in vec {
+        sum += x;  // Peut overflow en debug!
+    }
+    sum
+}
+// Note: Correct mais peut panic en debug mode
+```
+
+**Mutant C : filter_even inverse**
+
+```rust
+pub fn filter_even(vec: &[i32]) -> Vec<i32> {
+    vec.iter().filter(|&&x| x % 2 != 0).copied().collect()
+}
+// Pourquoi faux : Filtre les impairs au lieu des pairs
+```
+
+**Mutant D : reverse_in_place ne modifie pas**
+
+```rust
+pub fn reverse_in_place(vec: &mut Vec<i32>) {
+    let _ = vec.iter().rev().collect::<Vec<_>>();
+    // Ne modifie pas vec!
+}
+// Pourquoi faux : vec reste inchange
+```
+
+**Mutant E : find_max retourne minimum**
+
+```rust
+pub fn find_max(vec: &[i32]) -> Option<i32> {
+    vec.iter().copied().min()  // min au lieu de max!
+}
+// Pourquoi faux : Retourne le minimum
+```
+
+---
+
+## SECTION 5 : COMPRENDRE (DOCUMENT DE COURS COMPLET)
 
 ### 5.1 Ce que cet exercice enseigne
 
-**Vec<T>** - Le tableau dynamique de Rust:
+| Concept | Description | Importance |
+|---------|-------------|------------|
+| Vec<T> | Collection dynamique | Critique |
+| push/pop | Ajout/retrait elements | Critique |
+| iter() | Iteration | Critique |
+| Capacity | Gestion memoire | Important |
 
-1. **Heap-allocated** - Donnees sur le tas
-2. **Growable** - Peut grandir automatiquement
-3. **Generic** - Vec<T> pour tout type T
-4. **Ownership** - Possede ses elements
+---
 
 ### 5.3 Visualisation ASCII
 
+**Vec<i32> en memoire :**
+
 ```
-VEC MEMORY LAYOUT:
-
-let v: Vec<i32> = vec![1, 2, 3];
-
-Stack:              Heap:
-+----------+        +---+---+---+---+---+
-| ptr      | -----> | 1 | 2 | 3 | ? | ? |
-+----------+        +---+---+---+---+---+
-| len: 3   |          ^         ^
-+----------+          |         |
-| cap: 5   |         len=3    cap=5
-+----------+
-
-GROWTH (push):
-v.push(4);
-
-Stack:              Heap:
-+----------+        +---+---+---+---+---+
-| ptr      | -----> | 1 | 2 | 3 | 4 | ? |
-+----------+        +---+---+---+---+---+
-| len: 4   |
-| cap: 5   |
-
-v.push(5);
-v.push(6);  // Depasse capacity!
-
-Stack:              Heap (new allocation):
-+----------+        +---+---+---+---+---+---+---+---+---+---+
-| ptr      | -----> | 1 | 2 | 3 | 4 | 5 | 6 | ? | ? | ? | ? |
-+----------+        +---+---+---+---+---+---+---+---+---+---+
-| len: 6   |
-| cap: 10  |        (capacity doubled)
+Stack:                          Heap:
++------------------+           +---+---+---+---+---+---+
+| ptr --------------+--------->| 1 | 2 | 3 |   |   |   |
+| len: 3           |           +---+---+---+---+---+---+
+| capacity: 6      |             0   1   2   3   4   5
++------------------+                       ^
+                                          |
+                            len=3 (utilise)
+                            capacity=6 (alloue)
 ```
 
-### 5.5 Vec vs slice
+**Push et reallocation :**
+
+```
+Initial: capacity=4, len=3
++---+---+---+---+
+| 1 | 2 | 3 |   |
++---+---+---+---+
+
+Apres push(4): capacity=4, len=4
++---+---+---+---+
+| 1 | 2 | 3 | 4 |
++---+---+---+---+
+
+Apres push(5): REALLOCATION! capacity=8, len=5
++---+---+---+---+---+---+---+---+
+| 1 | 2 | 3 | 4 | 5 |   |   |   |
++---+---+---+---+---+---+---+---+
+```
+
+---
+
+### 5.5 Cours Complet
 
 ```rust
-// Vec<T>: owned, mutable, heap
-let mut vec: Vec<i32> = vec![1, 2, 3];
-vec.push(4);  // OK
+// Creation
+let v1: Vec<i32> = Vec::new();
+let v2 = vec![1, 2, 3];
+let v3 = vec![0; 10];  // 10 zeros
+let v4 = Vec::with_capacity(100);
 
-// &[T]: borrowed slice, immutable view
-let slice: &[i32] = &vec[..];
-// slice.push(4);  // Erreur!
+// Modification
+v.push(element);       // Ajoute a la fin
+v.pop();               // Retire de la fin -> Option
+v.insert(index, elem); // Insere a l'index
+v.remove(index);       // Retire a l'index
 
-// &mut [T]: mutable slice, peut modifier elements
-let slice_mut: &mut [i32] = &mut vec[..];
-slice_mut[0] = 10;  // OK
-// slice_mut.push(4);  // Erreur! Ne peut pas changer la taille
+// Acces
+v[0]                   // Acces direct (panic si hors bornes)
+v.get(0)               // Option<&T> (safe)
+v.first()              // Option<&T>
+v.last()               // Option<&T>
 
-// Conversion
-let vec: Vec<i32> = slice.to_vec();  // Copie
-let slice: &[i32] = &vec;            // Borrow (deref coercion)
+// Iteration
+for x in &v { }        // Emprunte
+for x in &mut v { }    // Emprunte mut
+for x in v { }         // Consomme (move)
+
+// Methodes utiles
+v.len()                // Nombre d'elements
+v.is_empty()           // len == 0
+v.capacity()           // Espace alloue
+v.clear()              // Vide le vecteur
+v.reverse()            // Inverse en place
+v.sort()               // Trie en place
 ```
+
+---
+
+## SECTION 6 : PIEGES — RECAPITULATIF
+
+| # | Piege | Consequence | Solution |
+|---|-------|-------------|----------|
+| 1 | v[i] hors bornes | Panic | Utiliser get(i) |
+| 2 | pop() sur vide | Retourne None | Gerer Option |
+| 3 | Iteration + modification | Borrow error | Utiliser indices ou drain |
 
 ---
 
 ## SECTION 7 : QCM
 
-### Question 1
-Que se passe-t-il quand Vec depasse sa capacite ?
+### Question 1 (4 points)
+Quelle est la difference entre len() et capacity() ?
 
-A) Erreur de compilation
-B) Panic
-C) Reallocation avec plus de capacite
-D) Les elements sont perdus
-E) Rien
+- A) Aucune difference
+- B) len = elements stockes, capacity = espace alloue
+- C) len = espace alloue, capacity = elements stockes
+- D) len est deprecated
 
-**Reponse correcte: C**
-
-### Question 2
-Quelle est la difference entre Vec<T> et &[T] ?
-
-A) Pas de difference
-B) Vec est owned et growable, &[T] est borrowed
-C) &[T] est plus rapide
-D) Vec est sur la stack
-E) &[T] est mutable
-
-**Reponse correcte: B**
+**Reponse : B** — len compte les elements, capacity l'espace reserve.
 
 ---
 
-## SECTION 9 : DEPLOYMENT PACK
+## SECTION 8 : RECAPITULATIF
+
+| Critere | Valeur |
+|---------|--------|
+| **ID** | 0.7.12 |
+| **Nom** | vectors |
+| **Difficulte** | 4/10 |
+| **Duree** | 45 min |
+| **XP Base** | 90 |
+| **Langages** | Rust Edition 2024 |
+| **Concepts cles** | Vec<T>, push, pop, iter, capacity |
+| **Prerequis** | result |
+| **Domaines** | Collections, Memory |
+
+---
+
+## SECTION 9 : DEPLOYMENT PACK (JSON COMPLET)
 
 ```json
 {
-  "exercise_id": "0.7.12-a",
-  "name": "vectors",
-  "language": "rust",
-  "language_version": "edition2024",
-  "files": ["src/lib.rs"],
-  "tests": {
-    "basic": "vec_basic_tests",
-    "manipulation": "vec_manipulation_tests",
-    "iteration": "vec_iteration_tests"
+  "deploy": {
+    "hackbrain_version": "5.5.2",
+    "engine_version": "v22.1",
+    "exercise_slug": "0.7.12-vectors",
+    "generated_at": "2026-01-16",
+
+    "metadata": {
+      "exercise_id": "0.7.12",
+      "exercise_name": "vectors",
+      "module": "0.7",
+      "concept": "m",
+      "concept_name": "Vectors",
+      "prerequisites": ["0.7.11"],
+      "tags": ["vec", "push", "pop", "iter", "collect"]
+    }
   }
 }
 ```
+
+---
+
+*Document genere selon HACKBRAIN v5.5.2*
